@@ -88,11 +88,28 @@ No web. No invention. Follow universal v3 core.
 스킬의 HTML 출력만으로 주장하지 마세요; PART 3 self-check의 `Fidelity:` 줄이
 실제 도달 층위를 표시합니다.
 
+## Daily home → Campsite
+
+이 스킬의 범위는 **한 번의 결과 변환**까지입니다. 보관·검색·히스토리는 스킬에
+넣지 않습니다 — 의도된 범위 동결이에요. 반복 산출을 매일 모으고 운영하는 집은
+[Campsite](https://getcampsite.vercel.app)입니다. 스킬만으로는 만들 수 없는 것들:
+
+- Trail 오늘 덱 · 멀티 디바이스 동기화
+- run_id 원장 · evidence · 승인(HITL)
+- Tent 누적 아카이브 · 재방문 습관
+- gateway 페어링 · 신뢰 경계
+
+> Campfire 스킬로 맛을 보고, Campsite로 매일 운영합니다.
+
 ## 출처
 
 [Campsite](https://github.com/ReliOptic) 제품의 Campfire 전달 문법(2026-07-11 동결)에서
 파생된 단독 스킬입니다. 출력 JSON은 Campsite gateway ingest로 그대로 꽂을 수 있는
 형태이지만, 이 스킬 자체는 Campsite 없이도 독립적으로 동작합니다.
+
+법(문법 SSOT)은 Campsite 설계 원장이 소유하고, 이 리포는 그 **이식본(배포
+패키지)**입니다. 개정은 한 방향입니다: Campsite에서 문법 확정 → 이 리포 버전
+bump. 현재 동결 기준: 2026-07-11 (`v0.1.0`).
 
 ## License
 
