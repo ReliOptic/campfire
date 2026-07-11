@@ -75,9 +75,18 @@ No web. No invention. Follow universal v3 core.
 - **PART 1** — 완결된 단일 HTML 파일 (플레이어: TAP NEXT · hold pause · reduced-motion)
 - **PART 2** — BriefEnvelope 호환 motion_brief JSON. `fallback_text` 필수 —
   **위젯 때문에 메시지가 유실되는 일은 절대 없다.** 마지막 씬은 `summary: true`
-- **PART 3** — self-check 6줄 (Decision / One-liner / Domain fit / Load / L2 / gates)
+- **PART 3** — self-check 6줄 (Decision / One-liner / Domain fit / Load / Fidelity / gates)
 
 여러 런타임에서 같은 품질이 나오는지는 [scoring.md](scoring.md)로 검증합니다.
+
+## 충실도 (Fidelity) 계약
+
+이 스킬은 **L1**(탭 시퀀스 플레이어)을 기본으로 보장하고, attention 케이스는
+**L2**(형태가 곧 주장)까지 목표로 합니다. **L3**(결정론적 풀 렌더·프레임 단위
+재생 스트림)나 **L4**(복수 아티팩트를 담는 place)는 이 스킬 하나로는 만들 수
+없습니다 — 별도 렌더 엔진과 호스트 앱이 있어야 합니다. "완전 시네마"를 이
+스킬의 HTML 출력만으로 주장하지 마세요; PART 3 self-check의 `Fidelity:` 줄이
+실제 도달 층위를 표시합니다.
 
 ## 출처
 

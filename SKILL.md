@@ -29,6 +29,17 @@ If a slot is missing, drop it or mark confidence limited — never invent.
 4. Wire field names (no silent renames)
 5. Visual polish is downstream
 
+## Fidelity ceiling
+This skill guarantees **L1** (interactive tap-through player) by default, and
+**L2** (one visual form carries the claim) when attention_state=attention or
+pack.l2_required=true — see "L2 impact" below. JSON output alone, with no
+player, is **L0**.
+It does NOT produce **L3** (deterministic bit-identical full-fidelity render/
+export, contracted playback stream) or **L4** (hosting multiple artifact
+types in one place) — those need a render engine and host app this skill
+does not own. Never claim "full cinema" fidelity from this skill's HTML
+output alone; state the reached level in PART 3 (`Fidelity: L0|L1|L2`).
+
 ## Family look
 INVARIANT: w→say→sub→evidence→caption; tap=next; journalism; motion allowlist
 (count/fill/opacity/gap/rise/scaleX); flip/source law; slim decision card;
@@ -174,5 +185,5 @@ Decision: ...
 One-liner (what/why/so-what): ...
 Domain class + hero object: ...
 Load removed: ...
-L2: pass|exempt|fail — ...
+Fidelity: L1 (+ L2 pass|exempt|fail if attention) — ...
 Cover-test + copy-gate: ...
