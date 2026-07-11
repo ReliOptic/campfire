@@ -1,0 +1,17 @@
+# pulse — 일일 지표 펄스. hero는 4-key rows 보드, portfolio band 아님.
+pack_id: daily-macro-v1
+domain_class: pulse
+audience_of_one: "매크로 일일 펄스를 보는 운용/리서치 개인"
+through_line_template: "오늘 레짐이 어제의 연장인가, 한 줄로 뭐가 바뀌었나?"
+brief_type: metric
+attention_default: calm
+l2_required: false
+origin: cronlet
+camp_id: camp-investing
+slots:
+  - { id: rates, meaning: "금리", preferred_objects: [rows] }
+  - { id: fx, meaning: "환율", preferred_objects: [rows] }
+  - { id: energy, meaning: "에너지", preferred_objects: [rows] }
+  - { id: risk, meaning: "VIX/위험", preferred_objects: [rows, num] }
+  - { id: regime_line, meaning: "레짐 한 줄", preferred_objects: [] }  # say 전용
+must_use_slots: [regime_line]

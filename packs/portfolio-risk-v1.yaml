@@ -1,0 +1,25 @@
+# threshold — 임계선 감시. attention이면 L2 의무.
+pack_id: portfolio-risk-v1
+domain_class: threshold
+audience_of_one: "개인 포트폴리오 보유자 — 리스크 모니터 (투자 조언 아님)"
+through_line_template: "지금 신규 매수를 열어도 되는가, 한도 때문에 보류인가?"
+brief_type: verdict
+attention_default: attention  # 임계선 위반 시; 아니면 calm
+l2_required: auto
+origin: cronlet
+camp_id: camp-investing
+slots:
+  - { id: leveraged_weight, meaning: "레버리지 ETF 비중 vs 한도", preferred_objects: [num, band] }
+  - { id: movers, meaning: "오늘 손익 기여", preferred_objects: [items, rows] }
+  - { id: sector_weight, meaning: "섹터 집중", preferred_objects: [rows, num] }
+  - { id: triggers, meaning: "위반 목록", preferred_objects: [caution, steps] }
+must_use_slots: [leveraged_weight]
+tone_hint: "monitoring memo, not advice"
+banned_leads: ["Cronlet 이름 헤드라인", "item count only"]
+actions_template:
+  - role: recommended
+    label_template: "{today_action_short}"
+    consequence_template: "{today_action_consequence}"
+  - role: secondary
+    label_template: "근거 저장"
+    consequence_template: "오늘 노출·트리거 근거를 아카이브에 남겨 둔 뒤 돌아와요."

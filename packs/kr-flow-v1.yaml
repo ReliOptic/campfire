@@ -1,0 +1,13 @@
+# flow — 수급/보드. 주체별 순매수 + 방향.
+pack_id: kr-flow-v1
+domain_class: flow
+audience_of_one: "국내 수급을 의사결정 입력으로 쓰는 사람"
+through_line_template: "오늘 수급이 내 포지션에 의미를 주나, 관망인가?"
+brief_type: metric
+attention_default: calm
+l2_required: false
+origin: cronlet
+slots:
+  - { id: net_flows, meaning: "주체별 순매수", preferred_objects: [rows] }
+  - { id: read, meaning: "한 줄 해석", preferred_objects: [] }
+must_use_slots: [net_flows]

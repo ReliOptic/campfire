@@ -1,0 +1,15 @@
+# regime — 주간 레짐 판정. hero는 레짐 선언 한 줄 + gauges/rows.
+pack_id: regime-weekly-v1
+domain_class: regime
+audience_of_one: "주 단위로 레짐 전환만 확인하는 사람"
+through_line_template: "이번 주 레짐은 유지인가 전환인가, 내 스탠스를 바꿀 이유가 있나?"
+brief_type: report  # 전환 선언이면 verdict 성격
+attention_default: calm
+l2_required: false
+origin: cronlet
+slots:
+  - { id: regime_call, meaning: "레짐 선언 한 줄", preferred_objects: [] }  # say 전용
+  - { id: regime_gauges, meaning: "레짐 확신도", preferred_objects: [gauges] }
+  - { id: shifts, meaning: "지난주 대비 변화", preferred_objects: [rows] }
+  - { id: watch, meaning: "다음 주 감시 목록", preferred_objects: [steps, items] }
+must_use_slots: [regime_call]

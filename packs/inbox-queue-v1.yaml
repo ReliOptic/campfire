@@ -1,0 +1,19 @@
+# inbox — 액션 큐 (아침 메일 등). 답할 것이 있으면 attention, hero는 큐 + CTA 1개.
+pack_id: inbox-queue-v1
+domain_class: inbox
+audience_of_one: "아침에 받은 편지함에서 답할 것만 골라내려는 사람"
+through_line_template: "지금 내가 답해야 하는 것은 무엇이고, 나머지는 왜 기다려도 되나?"
+brief_type: ranked  # 액션 있으면 verdict 성격
+attention_default: calm  # action_items > 0 이면 attention
+l2_required: auto
+origin: cronlet
+slots:
+  - { id: action_items, meaning: "답장/결정 필요 항목", preferred_objects: [items] }
+  - { id: fyi_items, meaning: "읽기만 하면 되는 것", preferred_objects: [items, chips] }
+  - { id: zero_line, meaning: "비었을 때 한 줄", preferred_objects: [] }
+must_use_slots: [action_items]
+banned_leads: ["미읽음 개수 헤드라인"]
+actions_template:
+  - role: recommended
+    label_template: "{first_reply_short}"
+    consequence_template: "{first_reply_consequence}"

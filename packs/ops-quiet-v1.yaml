@@ -1,0 +1,12 @@
+# ops_quiet — 시스템 건강 확인. 볼 것 없으면 4씬 플레이어 강제 금지 — quiet_row/plain_text 선호.
+pack_id: ops-quiet-v1
+domain_class: ops_quiet
+audience_of_one: "시스템 건강만 확인하면 되는 운영자"
+through_line_template: "오늘 내가 손댈 일이 있나?"
+brief_type: quiet  # 또는 plain
+attention_default: quiet
+l2_required: false
+origin: cronlet
+slots:
+  - { id: status, meaning: "green/amber + one line", preferred_objects: [] }
+must_use_slots: [status]

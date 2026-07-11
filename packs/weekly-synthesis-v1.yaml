@@ -1,0 +1,14 @@
+# digest — 주간 종합. 반복 신호 → 다음 주 실험 1개.
+pack_id: weekly-synthesis-v1
+domain_class: digest
+audience_of_one: "일주일 산출을 다음 주 행동 1개로 압축하려는 사람"
+through_line_template: "다음 주 내가 실험할 것 1개는 무엇인가?"
+brief_type: report
+attention_default: calm
+l2_required: false
+origin: cronlet
+slots:
+  - { id: signals, meaning: "반복 신호", preferred_objects: [items] }
+  - { id: experiments, meaning: "실험 목록", preferred_objects: [steps] }
+  - { id: monday_first, meaning: "월요일 첫 행동", preferred_objects: [] }
+must_use_slots: [monday_first]

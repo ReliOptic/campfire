@@ -1,0 +1,19 @@
+# Run snapshot — 보편 래퍼. 모든 도메인이 같은 봉투를 쓴다. 값만 채운다.
+# pack과 숫자가 충돌하면 snapshot이 이긴다. 스킬은 live fetch를 하지 않는다.
+
+run:
+  report_date: "YYYY-MM-DD"
+  scheduled_at: "YYYY-MM-DDTHH:MM:SS+09:00"
+  job_id: string                     # 스케줄러의 잡 id
+  run_id: string                     # 런타임이 발급한 실행 id (있으면)
+  brief_id: "brief-..."
+  confidence: sufficient|limited|error
+  attention_state: attention|calm|quiet|failed   # pack 기본값을 덮어쓸 수 있다
+  values:                            # flat map: slot_id → 데이터 (형태는 SKILL.md scene object shapes)
+    <slot_id>: ...
+  sources:
+    - { title: string, source_type: gmail|web|calendar|repo|manual,
+        fresh?: string, trust?: high|medium|low|publisher_verified,
+        quote?: string, why?: string }
+  action_fills:                      # pack.actions_template의 {placeholder} 채움값
+    <placeholder>: string

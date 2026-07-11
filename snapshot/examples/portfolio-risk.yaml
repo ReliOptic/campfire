@@ -1,0 +1,24 @@
+# 예시 — portfolio-risk-v1 pack용 스냅샷 (합성 데이터)
+run:
+  report_date: "2026-07-11"
+  scheduled_at: "2026-07-11T08:30:00+09:00"
+  job_id: "portfolio-risk-daily"
+  run_id: "run-example-0001"
+  brief_id: "brief-portfolio-2026-07-11"
+  confidence: sufficient
+  attention_state: attention          # leveraged_weight가 한도 초과
+  values:
+    leveraged_weight: { pct: 23, line: 20, label: "레버리지 ETF 비중" }
+    movers:
+      - { t: "SOXL", d: "반도체 3x", delta: "+4.2%", dir: up }
+      - { t: "NVDA", d: "AI 반도체", delta: "+1.8%", dir: up }
+      - { t: "TSLA", d: "전기차", delta: "-2.1%", dir: dn }
+    sector_weight: { pct: 41, label: "반도체·AI 집중" }
+    triggers:
+      - "레버리지 비중 23% > 한도 20%"
+  sources:
+    - { title: "브로커 일일 포지션 스냅샷", source_type: manual, fresh: "08:30", trust: high,
+        why: "보유 비중 계산의 원천" }
+  action_fills:
+    today_action_short: "신규 매수 보류"
+    today_action_consequence: "레버리지가 한도 아래로 내려갈 때까지 신규 매수를 열지 않아요."

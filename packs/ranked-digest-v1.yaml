@@ -1,0 +1,13 @@
+# ranked — 뉴스/예측시장 다이제스트. hero는 1위 항목의 내용 리드 — "새 글 3건" 금지.
+pack_id: ranked-digest-v1
+domain_class: ranked
+audience_of_one: "구독 피드에서 오늘 볼 1–3개만 고르는 사람"
+through_line_template: "오늘 내가 열 가치 있는 항목은 무엇이고 왜 1순위인가?"
+brief_type: ranked
+attention_default: calm
+l2_required: false
+origin: cronlet  # 구독 배달이면 trail
+slots:
+  - { id: top_items, meaning: "순위 항목", preferred_objects: [items] }
+  - { id: why_gate, meaning: "게이트 통과 이유", preferred_objects: [sub, chips] }
+must_use_slots: [top_items]

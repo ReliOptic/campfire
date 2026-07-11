@@ -1,0 +1,38 @@
+# Domain pack schema
+# 스킬은 아래 필드를 읽어 오브젝트 선택·카피 슬롯만 바꾼다. 문법은 안 바꾼다.
+# 규칙: pack은 레이아웃 템플릿을 고정하지 않는다.
+#       preferred_objects는 힌트일 뿐, 스킬이 스냅샷 밀도에 맞게 고른다.
+# 표기: `?` 접미사 = 선택 필드. 나머지는 필수.
+
+pack_id: string                  # e.g. portfolio-risk-v1
+domain_class: threshold|pulse|ranked|flow|digest|ops_quiet|inbox|regime
+audience_of_one: string          # 누구를 위한 브리프인가 — 이 스킬은 한 명을 위한 저널리즘
+through_line_template: string    # 브리프가 답해야 하는 질문 ({slots} 사용 가능)
+brief_type: verdict|metric|ranked|report|quiet|plain
+attention_default: attention|calm|quiet
+l2_required: boolean|auto        # auto = attention_state가 attention일 때만 true
+origin: cronlet|trail|session
+camp_id?: string                 # Campsite 타깃 인박스를 알 때만
+
+# Domain-native slots — 의미의 카탈로그이지 UI 위젯이 아니다
+slots:
+  - id: string
+    meaning: string              # 어떤 판단을 지지하는가
+    preferred_objects: [num|band|rows|items|gauges|steps|caution|chips|sub]
+                                 # [] = 헤드라인(say) 전용 슬롯
+    unit?: string
+    line?: { lo?: number, hi?: number, label?: string }   # 임계선
+
+# Selection rules
+must_use_slots: [id, ...]        # 스냅샷에 존재하면 반드시 사용
+drop_if_missing_ok?: [id, ...]
+
+# Voice accents (패밀리룩 범위 안에서)
+tone_hint?: string               # e.g. "monitoring memo, not advice"
+banned_leads?: [string]          # e.g. "Cronlet 이름 헤드라인"
+
+# CTA templates ({placeholder}는 snapshot.action_fills로 채움)
+actions_template:
+  - role: recommended|secondary  # recommended → JSON에서 recommended:true + primary:true
+    label_template: string
+    consequence_template: string
