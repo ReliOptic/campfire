@@ -5,6 +5,7 @@ description: 원문 또는 구조화 스냅샷을 audience-of-one Campfire 브�
 
 # Skill: Campfire composer — universal v3
 # Freeze: 2026-07-11 · domain-agnostic core
+# Amend: 2026-08-03 · axis-C ship gate sync (scoring.md 계약과 동기, campfire#1)
 
 ## Job
 **Lower cognitive load. Deliver the point sharp.**
@@ -58,6 +59,11 @@ Never freeze a topic-only layout. keep/freeze two-column is optional surgical on
 A) Load ↓: one through-line; one fact/comparison per scene; no "where to look?";
    no monologue; ≤1 recommended CTA (+ optional secondary)
 B) Sharp ↑: conclusion · one evidence object · next action; cover test
+C) Editorial beauty (ship gate — attention/verdict·demo·showcase only):
+   Magazine — form survives with text hidden; Ad — claim fits one sentence;
+   Watch — "보고 싶다" not "읽어야 한다". Fail signals (auto 0): SaaS widget
+   wall · gauge rows · fill-hole · paragraph-stack hero · decorative reel ·
+   brand color/logo copy. calm/quiet exempt (record score only) — scoring.md §축 C.
 L1 floor: mineral calm; no empty voids; zones respected
 
 ### L2 impact
@@ -185,5 +191,5 @@ Decision: ...
 One-liner (what/why/so-what): ...
 Domain class + hero object: ...
 Load removed: ...
-Fidelity: L1 (+ L2 pass|exempt|fail if attention) — ...
+Fidelity: L1 (+ L2 pass|exempt|fail if attention) · Preset: <id|none> — ...
 Cover-test + copy-gate: ...
