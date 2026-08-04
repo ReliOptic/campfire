@@ -1,0 +1,47 @@
+{
+  "archetype": "motion_brief",
+  "archetype_version": "0.1",
+  "fallback_text": "BTC와 QQQ는 올랐고 USD/KRW는 내렸습니다. 임계선이나 포지션 규칙이 없어 오늘은 관찰 결론까지만 신뢰합니다.",
+  "payload": {
+    "origin": "cronlet",
+    "brief_type": "metric",
+    "attention_state": "calm",
+    "artifact_format": "motion_brief",
+    "confidence_level": "limited",
+    "title": "Daily Macro Pulse",
+    "scheduled_at": "2026-08-04T07:00:00+09:00",
+    "scenes": [
+      {
+        "w": "오늘의 네 줄",
+        "rows": [
+          { "k": "BTC", "v": "+2.1%", "s": "risk bid", "dir": "up" },
+          { "k": "QQQ", "v": "+0.7%", "s": "growth bid", "dir": "up" },
+          { "k": "USD/KRW", "v": "-0.4%", "s": "won firmer", "dir": "dn" },
+          { "k": "VIX", "v": "14.8", "s": "calm tape", "dir": "dn" }
+        ],
+        "beat": "lede"
+      },
+      {
+        "say": "위험자산 강세와 원화 강세가 같이 왔어요.",
+        "sub": "공급된 스냅샷 기준으로는 방어보다 리스크 선호가 앞섭니다.",
+        "beat": "evidence"
+      },
+      {
+        "say": "새 행동은 만들지 않아요.",
+        "sub": "임계선이나 포지션 규칙이 스냅샷에 없어서, 오늘은 관찰 결론까지만 신뢰합니다.",
+        "summary": true,
+        "beat": "land"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Yahoo Finance snapshot via Hermes",
+        "source_type": "web",
+        "fresh": "today",
+        "trust": "medium",
+        "why": "현재 Campsite source wire에는 URL 또는 stable ID가 실리지 않아 Hermes 런타임 스냅샷으로만 추적합니다."
+      }
+    ],
+    "actions": []
+  }
+}

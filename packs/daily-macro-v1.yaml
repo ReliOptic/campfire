@@ -15,3 +15,11 @@ slots:
   - { id: risk, meaning: "VIX/위험", preferred_objects: [rows, num] }
   - { id: regime_line, meaning: "레짐 한 줄", preferred_objects: [] }  # say 전용
 must_use_slots: [regime_line]
+
+
+delivery_gate:
+  first_scene_object: [rows]
+  copy_before_object: forbid
+  action_policy: decision_or_honest_no_action
+  forbidden_action_labels: ["Open in Tent", "Tent에 저장"]
+  source_policy: explicit_why_limitation_required

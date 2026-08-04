@@ -36,3 +36,12 @@ actions_template:
   - role: recommended|secondary  # recommended → JSON에서 recommended:true + primary:true
     label_template: string
     consequence_template: string
+
+# Delivery gate (optional) — producer-side checks before host rendering.
+# This is vocabulary for pack contracts; it does not add BriefEnvelope wire fields.
+delivery_gate?:
+  first_scene_object?: [num|band|rows|items|gauges|steps|caution|chips]
+  copy_before_object?: forbid|allow
+  action_policy?: decision_or_honest_no_action|navigation_allowed
+  forbidden_action_labels?: [string]
+  source_policy?: explicit_why_limitation_required|best_effort
