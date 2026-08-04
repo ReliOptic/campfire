@@ -48,11 +48,16 @@ VARIABLE: scene count 3–6; beat; viz within tokens; tone within voice.
 Never freeze a topic-only layout. keep/freeze two-column is optional surgical only.
 
 ## Domain adaptation (Surface Law)
-- Market / portfolio / probability → lead with numbers, prices, thresholds, gauges, splits
-- News / inbox / conversation → lead with ranked items, queues, clusters, sources
-- Explanation is secondary; evidence expands; **item count is never the whole artifact**
-- Prefer objects from pack.preferred_objects that the snapshot actually fills
-- Do not force portfolio band layout onto ranked news (or vice versa)
+- Market / portfolio / probability / pulse → lead with a supported domain object: numbers, prices, thresholds, gauges, splits, or rows.
+- News / inbox / conversation → lead with ranked items, queues, clusters, sources.
+- Explanation is secondary; evidence expands; **item count is never the whole artifact**.
+- Surface Law overrides generic field order. `w → say → sub → evidence` is not permission to put prose before the object that carries the claim.
+- For market / portfolio / probability / pulse, scene 1 MUST include at least one supported domain object filled from the snapshot (`num`, `band`, `rows`, or `gauges`).
+- If a host renderer paints `say` or `sub` before rows/num/band/gauges, omit `say` and `sub` from scene 1. A short `w` grounding kicker is allowed; move the prose lede/interpretation to scene 2 or later.
+- Calm/quiet craft exemption only waives spectacle. It does not waive domain-object lead, the three questions (what changed / why trust / what action or no-action), source honesty, or action honesty.
+- Producer actions must be decision outcomes, not platform navigation or storage. Do not emit labels such as `Open in Tent`, `Tent에 저장`, or equivalent host-chrome actions as the recommended decision action.
+- Prefer objects from pack.preferred_objects that the snapshot actually fills.
+- Do not force portfolio band layout onto ranked news (or vice versa).
 
 ## Success
 A) Load ↓: one through-line; one fact/comparison per scene; no "where to look?";
@@ -174,9 +179,24 @@ Rules:
 3. Choose attention_state (pack default + breach rules if pack defines)
 4. Arc + beats; L2 only if required
 5. Slim CTAs from templates filled by snapshot
-6. HTML + JSON + self-check
+6. Use the active host transport: Campsite adapter JSON-only, otherwise HTML + JSON + self-check.
 
 ## Output
+### Campsite adapter transport override
+When the runtime explicitly targets the Campsite Hermes adapter, return
+**exactly one JSON object** and nothing else:
+
+```json
+{"archetype":"motion_brief","archetype_version":"0.1","fallback_text":"...","payload":{}}
+```
+
+`payload` is the motion brief. Do not emit HTML, Markdown fences, PART headings,
+or commentary on this transport. Runtime-provided structured snapshot values
+are authoritative; never browse for replacements or invent missing rows. This
+host transport overrides the default three-part authoring output below, but it
+does not relax Campfire grammar or source honesty.
+
+### Default authoring output
 PART 1: HTML (complete single file, inline CSS+JS; same scene data as JSON;
 TAP NEXT, hold pause, seg seek, reading-time durations, keyboard + reduced-motion)
 PART 2: JSON (BriefEnvelope + optional extensions; no commentary inside)
