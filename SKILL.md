@@ -1,209 +1,308 @@
 ---
 name: campfire
-description: 원문 또는 구조화 스냅샷을 audience-of-one Campfire 브리프(motion_brief JSON + 재생 가능한 HTML)로 변환한다. 도메인 무관 코어 — 주제는 pack, 숫자는 snapshot이 공급한다.
+description: 원문 또는 구조화 스냅샷을 audience-of-one Vista(인터랙티브 시각 artifact)로 구성한다. `campfire`는 legacy skill invocation이며, 제품에서 Campfire는 personalized Vista feed를 뜻한다.
 ---
 
-# Skill: Campfire composer — universal v3
-# Freeze: 2026-07-11 · domain-agnostic core
+# Skill: Vista composer — legacy invocation `campfire`
+# Canon: campsite-model/2026-09-14-v1
 
-## Job
-**Lower cognitive load. Deliver the point sharp.**
-한국어: 인지 부담을 덜어 주면서 내용은 선명하게.
-끝나면 보는 이가 무엇·왜·그래서 뭐를 한 호흡으로 말한다.
+## 0. Terminology — non-negotiable
 
-NOT: slide decorator · dashboard reel · log/CoT printer · chrome demo ·
-generic "market news for everyone".
-ARE: audience-of-one delivery skill — journalism on *their* rules/positions/actions.
+This skill keeps the invocation/package name `campfire` for compatibility. **Its output product object is a Vista.**
 
-## Inputs you will receive
-1) A **Domain pack** (class, through-line template, slots, CTA templates, L2 flag)
-2) A **Run snapshot** (today's values only; no live fetch)
-
-If pack and snapshot conflict on a number, **snapshot wins**.
-If a slot is missing, drop it or mark confidence limited — never invent.
-
-## Authority (higher wins)
-1. Job (load ↓ + sharp ↑)
-2. Journalism gates
-3. This grammar
-4. Wire field names (no silent renames)
-5. Visual polish is downstream
-
-## Fidelity ceiling
-This skill guarantees **L1** (interactive tap-through player) by default, and
-**L2** (one visual form carries the claim) when attention_state=attention or
-pack.l2_required=true — see "L2 impact" below. JSON output alone, with no
-player, is **L0**.
-It does NOT produce **L3** (deterministic bit-identical full-fidelity render/
-export, contracted playback stream) or **L4** (hosting multiple artifact
-types in one place) — those need a render engine and host app this skill
-does not own. Never claim "full cinema" fidelity from this skill's HTML
-output alone; state the reached level in PART 3 (`Fidelity: L0|L1|L2`).
-
-## Family look
-INVARIANT: w→say→sub→evidence→caption; tap=next; journalism; motion allowlist
-(count/fill/opacity/gap/rise/scaleX); flip/source law; slim decision card;
-slate hot for priority data; consequence=light (ink-invert), not orange heat.
-VARIABLE: scene count 3–6; beat; viz within tokens; tone within voice.
-Never freeze a topic-only layout. keep/freeze two-column is optional surgical only.
-
-## Domain adaptation (Surface Law)
-- Market / portfolio / probability / pulse → lead with a supported domain object: numbers, prices, thresholds, gauges, splits, or rows.
-- News / inbox / conversation → lead with ranked items, queues, clusters, sources.
-- Explanation is secondary; evidence expands; **item count is never the whole artifact**.
-- Surface Law overrides generic field order. `w → say → sub → evidence` is not permission to put prose before the object that carries the claim.
-- For market / portfolio / probability / pulse, scene 1 MUST include at least one supported domain object filled from the snapshot (`num`, `band`, `rows`, or `gauges`).
-- If a host renderer paints `say` or `sub` before rows/num/band/gauges, omit `say` and `sub` from scene 1. A short `w` grounding kicker is allowed; move the prose lede/interpretation to scene 2 or later.
-- Calm/quiet craft exemption only waives spectacle. It does not waive domain-object lead, the three questions (what changed / why trust / what action or no-action), source honesty, or action honesty.
-- Producer actions must be decision outcomes, not platform navigation or storage. Do not emit labels such as `Open in Tent`, `Tent에 저장`, or equivalent host-chrome actions as the recommended decision action.
-- Prefer objects from pack.preferred_objects that the snapshot actually fills.
-- Do not force portfolio band layout onto ranked news (or vice versa).
-
-## Success
-A) Load ↓: one through-line; one fact/comparison per scene; no "where to look?";
-   no monologue; ≤1 recommended CTA (+ optional secondary)
-B) Sharp ↑: conclusion · one evidence object · next action; cover test
-L1 floor: mineral calm; no empty voids; zones respected
-
-### L2 impact
-If pack.l2_required is true OR (auto and attention_state=attention):
-  Pass ≥4/6 of the L2 checklist (see scoring.md §L2); ONE form IS the claim.
-If quiet/plain or l2_required false: do NOT force spectacle — L2 exempt.
-
-## Journalism
-- One decision/question for the whole brief (from pack.through_line_template + snapshot)
-- No meta-count leads; no teaser without later delivery
-- Organic arc; info gain; summary no new facts
-- Comparisons need visuals
-- No invented numbers
-- confidence_level honest
-
-## Type stack (no schema rename)
-w=kicker (no §paths) · say=headline ≤2 lines · sub=standfirst (context OR so-what)
-Evidence objects · optional chips. JSON: \n for line break; no raw <br> in envelope.
-
-## Zones
-orientation → statement → evidence → consequence (top flow, no fill-hole)
-
-## Arc + beat
-stake/lede → hero change → evidence/scan → optional risk → land/summary
-Each scene: "beat": "lede"|"evidence"|"scan"|"land" when possible.
-
-## Pacing
-BASE: d=1.5+chars/21; summary×0.82; clamp 2.6–8.5
-EDIT: beat may bias hold; avoid all scenes stuck at ceiling
-Seg ∝ dur; total ~8–20s when possible; entrance order = hierarchy
-
-## Player (HTML)
-392px; TAP NEXT; body tap=next; hold≥400ms pause; seg seek;
-Enter/→ next; Space pause; reduced-motion OK
-Hot=#33404E; financial duotone only on market rows
-CTA ink-invert; slim card (recommended tag, not dark-fill monopoly)
-
-## Motion allowlist
-ALLOWED: count fill opacity gap rise scaleX
-BANNED decoration: bounce glitch 3D cinematic MP4-body rainbow
-
-## N2 parody
-Only if pack allows and: not data claim · ≤1s · collapse end · once · low chroma
-
-## Flip / source
-Front=edited brief; back/panel=immutable source (snapshot or original_source)
-Chrome control only — never body-tap. Source panel OK as flip substitute.
-
-## Decision slim
-Equal visual weight; recommended=small tag; consequence≥8;
-dismiss=defer
-
-## Voice + copy gate
-해요체 + dry wit ~70%; ≤1 metaphor/scene; roast systems not people;
-CTA=outcome fork. Copy gate 6 checks (headline scene, standfirst why-now,
-no §paths, action sentences, CTA branch, no abuse).
-
-## Wire: motion_brief JSON
-Emit a BriefEnvelope-compatible object:
-
+```text
+Camp      = project/context container
+Tent      = conversation thread
+Vista     = interactive visual artifact      <- this skill composes this
+Campfire  = personalized Vista feed          <- host product concern
+Trail     = verified publisher/channel       <- host product concern
+Stream    = realtime talk + show              <- host product concern
 ```
+
+Never call a newly created artifact a Campfire in product-facing copy. Existing wire/schema names remain compatible until the owning Campsite schema migrates.
+
+## 1. Job
+
+**Lower cognitive load without lowering information density or truth. Build a scene in which understanding happens.**
+
+The viewer should be able to explain, in their own words:
+
+1. what changed or matters,
+2. why that conclusion is supported,
+3. what action, decision, uncertainty, or no-action follows.
+
+NOT:
+- slide decorator,
+- dashboard reel,
+- log/chain-of-thought printer,
+- generic card stack,
+- paragraph fade/slide sequence,
+- fabricated cinematic spectacle.
+
+ARE:
+- audience-of-one information design,
+- advertising-grade art direction,
+- BI/data-journalism-grade factual fidelity,
+- interactive visual explanation.
+
+## 2. Inputs
+
+You may receive:
+
+1. **Domain pack** — domain class, slots, evidence requirements, terminology, preferred objects, action templates.
+2. **Run snapshot** — authoritative values/facts for this run.
+3. Optional **source material** — immutable or citable material to preserve.
+4. Optional **audience context** — only what is allowed for personalization.
+
+Rules:
+
+- Snapshot/source facts beat stylistic priors.
+- Never invent a missing number, source, date, unit, baseline, or certainty.
+- If pack and snapshot disagree on a measured value, use the authoritative snapshot and surface the mismatch if material.
+- Personalization may change explanation order/depth and relevance, not factual conclusion.
+
+## 3. Authority order
+
+1. Factual/source integrity
+2. Understanding objective
+3. Interaction/state correctness
+4. This Vista composition contract
+5. Legacy transport/schema compatibility
+6. Visual polish
+
+Visual polish is required, but never compensates for a broken state or false claim.
+
+## 4. Understanding objective
+
+Before scene design, complete:
+
+> **After this Vista, the viewer can explain ________.**
+
+Then identify:
+
+- central tension/question,
+- minimum evidence needed,
+- counterexample/uncertainty if material,
+- user decision/action/no-action,
+- what can be explored interactively without breaking the base narrative.
+
+If this objective cannot be stated, do not start decorating screens.
+
+## 5. Scene grammar
+
+### 5.1 Persistent objects over slide replacement
+
+Prefer the same semantic object continuing across time while its relation, position, scale, state, or annotation changes.
+
+Good:
+- two teams remain identifiable while their point gap changes,
+- one system diagram accumulates causality/evidence,
+- one price/threshold object moves through scenarios,
+- one map/flow changes under a user-controlled assumption.
+
+Bad:
+- title card disappears,
+- another text card appears,
+- same fact restated with a new icon,
+- animation exists only as entrance/exit decoration.
+
+### 5.2 No fixed scene count or duration
+
+Do **not** force a universal 3–6 scene or 8–20 second template.
+
+Timing follows:
+
+- reading time,
+- information gain,
+- relation complexity,
+- interaction opportunity,
+- necessary holds for comprehension.
+
+A short quiet Vista may be seconds. A complex explanation may be longer. Do not delete evidence merely to hit a duration target.
+
+### 5.3 Motion is semantic
+
+Motion should do at least one job:
+
+- direct attention,
+- reveal a relationship,
+- show change over time/state,
+- preserve continuity between explanations,
+- express a user manipulation and its consequence.
+
+Any CSS/SVG/Canvas/WebGL technique is allowed when justified and truthful. There is no universal six-property motion allowlist.
+
+## 6. Rendering model
+
+Preferred implementation:
+
+- HTML/CSS/JavaScript as executable shell,
+- DOM/SVG for text, geometry and data graphics,
+- Canvas/WebGL only when complex compositing/particles/3D materially helps,
+- generated/static images only as assets, not a screenshot substitute for the whole experience.
+
+Design around a single mobile-first stage. Responsive adaptation may recompose the same semantic objects; it must not create contradictory meanings.
+
+When implementing a controllable timeline, aim for a state model equivalent to:
+
+```text
+render(time, contentData, interactionState, viewport) -> visible scene
+```
+
+Seeking directly to a point should not produce a contradictory state compared with sequential playback.
+
+## 7. Data / evidence contract
+
+Keep factual content separate from visual choreography.
+
+For each material claim preserve, where applicable:
+
+- value,
+- unit,
+- baseline/comparator,
+- date/time window,
+- source/provenance,
+- confidence/uncertainty,
+- observed fact vs interpretation vs scenario/assumption.
+
+Numeric labels and their visual encodings must derive from the same value. Never make bar length, area, position, count, speed, or causal arrows imply more than the source supports.
+
+## 8. Domain-native surface law
+
+Lead with the object that carries the domain meaning.
+
+Examples:
+
+- market/portfolio/probability → price, threshold, distribution, exposure, scenario, flow;
+- news/inbox → ranked changes, source clusters, action queue, chronology;
+- sports → score/points/table/remaining fixtures/position relation;
+- operations → topology, state transition, bottleneck, dependency, failure boundary;
+- scientific/engineering → physical object, variable relation, uncertainty, measurement geometry.
+
+Text explains the object; it should not replace the object when the object can carry the claim.
+
+## 9. Art direction
+
+Each Vista gets a subject-appropriate visual world. Avoid one universal Campsite skin.
+
+Control through design tokens:
+
+- typography,
+- spacing,
+- hierarchy,
+- color roles,
+- line/shape language,
+- depth/light,
+- easing/rhythm,
+- interaction feedback.
+
+Aesthetics may be expressive. Data semantics remain strict.
+
+The 2026 Chizumulu-quality work is a **quality calibration**, not a layout template.
+
+## 10. Interaction
+
+Default path: understandable without touching.
+
+Optional interaction: deeper understanding when touched.
+
+Suitable interactions include:
+
+- select a comparison target,
+- toggle an assumption/scenario,
+- scrub time,
+- manipulate a meaningful object,
+- reveal evidence/source/context,
+- pause on an object and inspect it.
+
+Rules:
+
+- user input updates one coherent state model;
+- all dependent graphics/numbers/copy update together;
+- manipulating while autoplay runs should pause or clearly transfer temporal control;
+- provide a return/resume/reset path;
+- do not make host publication/share/auth mutations from an untrusted artifact frame;
+- keyboard/touch and reduced-motion paths should be supported where applicable.
+
+## 11. Source / sharing safety
+
+A Vista may contain only the audience context permitted for that artifact.
+
+A future Trail publication must not inherit raw private audience memory merely because the private Vista used it during composition. Public/shared derivatives require an explicit approved artifact revision or host-side sanitization/review contract.
+
+This skill does not grant publication authority.
+
+## 12. Legacy wire compatibility
+
+When a host still requires the existing Campsite BriefEnvelope/motion_brief shape, emit it without pretending those field names are current product nouns.
+
+Compatibility shape:
+
+```json
 {
-  "id": string,
-  "camp_id": string,                    // target inbox; "" if unknown
-  "origin": "cronlet" | "trail" | "session",
-  "brief_type": "verdict" | "metric" | "ranked" | "report" | "quiet" | "plain",
-  "attention_state": "attention" | "calm" | "quiet" | "failed",
-  "artifact_format": "motion_brief",    // "quiet_row" | "plain_text" for ops-quiet
-  "confidence_level": "sufficient" | "limited" | "error",
-  "title": string,
-  "scheduled_at": ISO-8601 with offset,
-  "scenes": [
-    { "w"?, "say"?, "sub"?, "num"?, "band"?, "items"?, "gauges"?, "rows"?,
-      "steps"?, "caution"?, "chips"?, "summary"?,
-      "beat"?: "lede"|"evidence"|"scan"|"land" }
-  ],
-  "sources": [ { "title", "source_type": "gmail"|"web"|"calendar"|"repo"|"manual",
-                 "fresh"?, "trust"?, "quote"?, "why"? } ],
-  "actions": [
-    { "label": string,
-      "consequence": string,            // ≥8 chars — 일어날 일을 문장으로
-      "recommended"?: boolean,
-      "primary"?: boolean }             // recommended와 함께 primary:true도 설정 (shipping-schema 필드)
-  ],
-  "fallback_text": string,              // REQUIRED — 위젯 때문에 메시지가 유실되는 일은 없다
-  "original_source"?: { "format": "text", "content": string }
+  "id": "string",
+  "camp_id": "string",
+  "origin": "cronlet | trail | session",
+  "brief_type": "verdict | metric | ranked | report | quiet | plain",
+  "attention_state": "attention | calm | quiet | failed",
+  "artifact_format": "motion_brief",
+  "confidence_level": "sufficient | limited | error",
+  "title": "string",
+  "scheduled_at": "ISO-8601",
+  "scenes": [],
+  "sources": [],
+  "actions": [],
+  "fallback_text": "required"
 }
 ```
 
-Scene object shapes:
+Important:
 
-```
-num    { v: number|string, dec?: 0-2, suf?: string, hot?: bool }
-band   { max: 0-1, at: 0-1, lo: string, hi: string }      // your-line threshold bar
-items  [ { n?: rank, t: title, d?: detail, delta?: string, dir?: "up"|"dn" } ]  max 5
-rows   [ { k, v, s?: sub, dir?: "up"|"dn", badge?: "ok"|"wait", bar?: {v: 0-1} } ]  max 6
-gauges [ { q: question, yes: 0-100, hot?: bool } ]  max 4
-steps  [ string ]  max 5 · caution: string · chips: [string]  max 4
-```
+- This is a **transport compatibility contract**, not the canonical product domain model.
+- Do not rename `camp_id`, `origin`, or `motion_brief` unless the owning schema changes.
+- `fallback_text` remains mandatory when required by the host schema.
+- One independent producer result should retain one independent canonical Vista identity.
 
-Rules:
-- Scene must carry ≥1 of say/num/items/gauges/rows/steps. Scenes max 8.
-- ≥2 scenes; **last scene summary: true**
-- Every action has consequence; ONE recommended max — mirror it as `primary: true`
-- `beat` / `recommended` / `original_source` are extensions: strict validators may
-  **strip** them, so a player that wants beat must read the raw JSON, not the
-  validated copy
-- `original_source.content` if present = snapshot prose, not a new rewrite
-- origin / brief_type / attention_state from pack + snapshot rules
+## 13. Output modes
 
-## Process
-1. Read pack → name through-line for THIS run
-2. Map snapshot → slots; drop empty; pick objects per Surface Law
-3. Choose attention_state (pack default + breach rules if pack defines)
-4. Arc + beats; L2 only if required
-5. Slim CTAs from templates filled by snapshot
-6. Use the active host transport: Campsite adapter JSON-only, otherwise HTML + JSON + self-check.
+### Campsite adapter JSON-only mode
 
-## Output
-### Campsite adapter transport override
-When the runtime explicitly targets the Campsite Hermes adapter, return
-**exactly one JSON object** and nothing else:
+If the active adapter explicitly requires the existing JSON envelope, return exactly the required JSON object and no HTML/Markdown commentary.
 
-```json
-{"archetype":"motion_brief","archetype_version":"0.1","fallback_text":"...","payload":{}}
+### Default authoring mode
+
+Produce:
+
+1. **Vista HTML** — complete single-file HTML/SVG/JS unless assets/dependencies are explicitly allowed.
+2. **Compatibility JSON** — when a host schema requires it.
+3. **Self-check** — concise evidence, not marketing language.
+
+Suggested self-check:
+
+```text
+Understanding objective: ...
+Claim/evidence fidelity: ...
+Domain object/art direction: ...
+Interaction/state path: ...
+Viewport/reduced-motion: ...
+Host/runtime claims not proven here: ...
 ```
 
-`payload` is the motion brief. Do not emit HTML, Markdown fences, PART headings,
-or commentary on this transport. Runtime-provided structured snapshot values
-are authoritative; never browse for replacements or invent missing rows. This
-host transport overrides the default three-part authoring output below, but it
-does not relax Campfire grammar or source honesty.
+## 14. Artifact-level verification
 
-### Default authoring output
-PART 1: HTML (complete single file, inline CSS+JS; same scene data as JSON;
-TAP NEXT, hold pause, seg seek, reading-time durations, keyboard + reduced-motion)
-PART 2: JSON (BriefEnvelope + optional extensions; no commentary inside)
-PART 3: six lines —
-Decision: ...
-One-liner (what/why/so-what): ...
-Domain class + hero object: ...
-Load removed: ...
-Fidelity: L1 (+ L2 pass|exempt|fail if attention) — ...
-Cover-test + copy-gate: ...
+Before calling a generated Vista complete, verify applicable rows:
+
+- target mobile viewport (at least the host's declared device size),
+- no clipping/overlap/overflow at key states,
+- initial/meaningful/final timeline states,
+- play/pause/seek/restart if supported,
+- interaction change + return/reset,
+- data label/visual encoding agreement,
+- source/uncertainty honesty,
+- reduced-motion behavior,
+- sandbox/no-credential assumptions,
+- missing/invalid input behavior.
+
+Do not claim host-product completion from artifact tests. Vista persistence, Campfire feed behavior, Trail publication, Camp/Tent state, Stream persistence, cross-user permissions, and backward compatibility require evidence in the owning Campsite runtime.
+
+If required evidence is missing: **partial / not yet closed**.
