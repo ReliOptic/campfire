@@ -1,115 +1,115 @@
-# Campfire — 에이전트가 부르는 audience-of-one 브리프 변환 스킬
+# Campfire skill — Vista composer compatibility package
 
-> 에이전트 유저가 Campfire 스킬을 켜면, 어떤 도메인이든 같은 전달 규칙으로 결과를 받는다.
+> **2026-09-14 product canon:** 이 저장소와 스킬 호출명 `campfire`는 호환성을 위해 유지하지만, 이 스킬이 만드는 제품 객체의 이름은 **Vista**입니다.
 
-크론 잡이나 에이전트 루틴의 산출물은 보통 긴 텍스트 로그로 도착합니다.
-Campfire는 그 자리에 끼우는 **표준 변환기**입니다:
-
-```
-원문 / 구조화 스냅샷  →  [Campfire skill]  →  motion_brief JSON + 재생 가능한 HTML
-```
-
-결과물은 "결과 예쁘게 쓰기"가 아니라, 한 명의 독자를 위한 저널리즘입니다 —
-그 사람의 규칙·포지션·행동에 비추어 **무엇·왜·그래서 뭐**를 한 호흡에 전달합니다.
-
-## 구조 — 문법은 하나, 주제는 pack, 숫자는 snapshot
-
-| 층 | 역할 | 바뀌는 주기 |
-|---|---|---|
-| **Core skill** ([SKILL.md](SKILL.md)) | 전달 품질 + 플레이어 문법 + wire 계약 | 불변 (동결본) |
-| **Domain pack** ([packs/](packs/)) | 그 잡의 슬롯·트리거·오브젝트 힌트 | 주제마다 교체 |
-| **Run snapshot** ([snapshot/](snapshot/)) | 이번 실행의 수치 | run마다 교체 |
-
-도메인마다 SYSTEM을 복제하지 않습니다. 코어는 도메인 중립이고,
-팩은 레이아웃을 고정하지 않으며(힌트만 제공), 숫자는 스냅샷이 전부입니다 —
-**스킬은 숫자를 발명하지 않습니다.**
-
-## 빠른 시작
-
-1. **SYSTEM** = [SKILL.md](SKILL.md) 본문 (frontmatter 제외)
-2. **USER** = 아래 템플릿
+Campsite의 현재 의미는 다음과 같습니다.
 
 ```text
-# Domain pack
-<packs/*.yaml 중 하나, 또는 packs/_schema.yaml로 직접 작성>
-
-# Run snapshot
-<snapshot/run-snapshot.yaml 형식으로 이번 실행 값 채움>
-
-# Deliver
-PART 1 HTML · PART 2 JSON · PART 3 self-check (six lines)
-No web. No invention. Follow universal v3 core.
+Camp      = project/context
+Tent      = conversation thread
+Vista     = interactive visual artifact
+Campfire  = personalized Vista feed
+Trail     = verified publisher/channel
+Stream    = realtime talk + show
 ```
 
-실행 예시는 [snapshot/examples/portfolio-risk.yaml](snapshot/examples/portfolio-risk.yaml)를 보세요.
+따라서 이 Repo의 역할은 **원문/구조화 스냅샷을 고품질 Vista render bundle로 변환하는 제작 스킬**입니다.
 
-## 도메인 클래스 8종
+```text
+원문 / 구조화 스냅샷
+        ↓
+[legacy invocation: campfire skill]
+        ↓
+Vista render bundle
+  ├─ playable HTML/SVG
+  └─ legacy-compatible motion_brief / BriefEnvelope payload
+```
 
-| Class | 예 | brief_type | attention 기본 | Hero object 기본 |
-|---|---|---|---|---|
-| **threshold** | 포트폴리오 리스크 한도 감시 | verdict | 위반 시 attention | `num`+`band` (your line) |
-| **pulse** | 일일 매크로 지표 | metric | calm | `rows` 보드 (4–6 keys) |
-| **ranked** | 뉴스·예측시장 다이제스트 | ranked | 상위 델타에 따라 | `items` 순위 + delta |
-| **flow** | 수급/자금 흐름 보드 | metric | calm | `rows` 순매수 + 방향 |
-| **digest** | 주간 종합 | report | calm | `items`/`steps` + 한 줄 |
-| **ops_quiet** | 시스템 헬스 체크 | quiet/plain | quiet | quiet row (플레이어 서커스 금지) |
-| **inbox** | 아침 메일 액션 큐 | ranked/verdict | 액션>0이면 attention | `items` 큐 + CTA 1개 |
-| **regime** | 주간 레짐 판정 | report/verdict | calm | 레짐 선언 한 줄 + gauges |
+`motion_brief`, `camp_id` 등 기존 wire field는 Campsite schema가 실제 migration되기 전까지 호환성 계약으로 유지합니다. 제품 용어를 맞춘다는 이유로 wire를 임의 변경하지 않습니다.
 
-각 클래스의 시드 팩이 [packs/](packs/)에 있습니다.
+## 이 Repo가 소유하는 것
 
-**L2 규칙 (보편):** `attention`이거나 pack이 `l2_required: true`면 하나의 시각 형태가
-곧 주장이어야 합니다 (portfolio면 band, ranked면 1위 갭 바). quiet에 L2를 시도하는 것
-자체가 실패(과잉)입니다.
+- Vista의 정보 서사와 장면 설계
+- 광고급 art direction + 데이터 저널리즘급 정확성
+- HTML/SVG 기반 playable interaction
+- domain pack / run snapshot을 이용한 사실 보존
+- 호스트에 전달할 compatibility payload
+- artifact-level self-check와 fidelity evidence
+
+## 이 Repo가 소유하지 않는 것
+
+- **Campfire** 개인화 feed/ranking
+- **Trail** publisher verification, publish/correct/withdraw/revoke
+- **Camp / Tent** persistence
+- **Stream** realtime session/persistence
+- 사용자 auth/permission
+
+이 기능들은 Campsite 제품 런타임에서 닫혀야 합니다. 이 스킬의 HTML 출력이 잘 재생된다는 이유만으로 그 동작이 구현됐다고 주장하지 않습니다.
+
+## 제작 철학
+
+목표는 “문장을 예쁘게 움직이는 것”이 아니라 **이해가 일어나는 장면**입니다.
+
+- 사실·수치·단위·기준 시점·출처를 연출과 분리합니다.
+- 같은 대상은 가능하면 동일한 시각 객체 정체성을 유지하며 변화합니다.
+- 모션은 주의, 관계, 변화, 연속성을 설명해야 합니다.
+- 사용자가 손대지 않아도 기본 경로로 이해되고, 조작하면 더 깊어져야 합니다.
+- 주제마다 다른 아트 디렉션을 허용합니다. 범용 다크 카드 템플릿을 제품 정체성으로 만들지 않습니다.
+- 개인화는 설명의 경로를 바꿀 수 있지만 사실의 결론을 바꾸지 않습니다.
+
+과거 v3의 카드/타이밍/allowlist는 **compatibility heuristic**일 뿐 현재 제품의 창작 상한이 아닙니다. 특히 고정된 8–20초 길이, 제한된 모션 프로퍼티, 문장 fade/slide 중심 구성은 새 Vista의 필수 규칙이 아닙니다.
+
+## 구조
+
+| 층 | 역할 | 변경 주기 |
+|---|---|---|
+| **Core skill** ([SKILL.md](SKILL.md)) | Vista 제작 원칙 + compatibility output | 버전 관리 |
+| **Domain pack** ([packs/](packs/)) | 도메인 슬롯·트리거·오브젝트 힌트 | 주제별 |
+| **Run snapshot** ([snapshot/](snapshot/)) | 이번 실행의 사실/수치 | run별 |
+
+팩은 시각 템플릿을 강제하지 않고, 숫자를 발명하지 않습니다.
+
+## 실행 형식
+
+기본 authoring 산출물은 다음을 지원합니다.
+
+1. **playable HTML/SVG Vista render bundle**
+2. **BriefEnvelope-compatible JSON** (legacy transport compatibility)
+3. **self-check / closure receipt**
+
+Campsite adapter가 JSON-only를 요구하면 해당 transport contract를 따릅니다. transport가 달라도 사실 정합성과 Vista 품질 기준은 동일합니다.
+
+## Fidelity
+
+이 스킬은 단독으로 호스트 플랫폼의 전체 완결성을 증명할 수 없습니다.
+
+- HTML에서 구현·검증한 interaction/timeline은 artifact-level evidence입니다.
+- Vista revision 저장, Campfire feed, Trail publishing, Stream persistence, permission은 Campsite runtime evidence가 필요합니다.
+- “full cinema”, “production-ready”, “published” 같은 표현은 실제 증거 범위를 넘어 사용하지 않습니다.
+
+완료 판정은 [`PRODUCT_CLOSURE_GUARDRAIL.md`](PRODUCT_CLOSURE_GUARDRAIL.md), 작업 원칙은 [`AGENTS.md`](AGENTS.md)를 따릅니다.
 
 ## 런타임별 장착
 
 | 런타임 | 가이드 |
 |---|---|
-| Hermes | [adapters/hermes.md](adapters/hermes.md) — 스킬 파일 등록, tools off |
-| Claude / Claude Code | [adapters/claude.md](adapters/claude.md) — 스킬 설치 또는 Project instructions |
-| ChatGPT | [adapters/chatgpt.md](adapters/chatgpt.md) — Custom instructions / Custom GPT |
+| Hermes | [adapters/hermes.md](adapters/hermes.md) |
+| Claude / Claude Code | [adapters/claude.md](adapters/claude.md) |
+| ChatGPT | [adapters/chatgpt.md](adapters/chatgpt.md) |
 
-## 출력 계약
+런타임은 제작 공급자입니다. 제품 데이터와 발행 권한은 Campsite가 소유합니다.
 
-- **PART 1** — 완결된 단일 HTML 파일 (플레이어: TAP NEXT · hold pause · reduced-motion)
-- **PART 2** — BriefEnvelope 호환 motion_brief JSON. `fallback_text` 필수 —
-  **위젯 때문에 메시지가 유실되는 일은 절대 없다.** 마지막 씬은 `summary: true`
-- **PART 3** — self-check 6줄 (Decision / One-liner / Domain fit / Load / Fidelity / gates)
+## Migration note
 
-여러 런타임에서 같은 품질이 나오는지는 [scoring.md](scoring.md)로 검증합니다.
+이 공개 Repo의 이름을 즉시 `vista`로 바꾸지는 않습니다. 기존 설치/링크/스킬 호출 호환성을 깨뜨릴 수 있기 때문입니다.
 
-## 충실도 (Fidelity) 계약
+```text
+package/repo invocation: campfire   (legacy compatibility)
+product artifact noun: Vista        (canonical)
+product feed noun: Campfire         (canonical)
+```
 
-이 스킬은 **L1**(탭 시퀀스 플레이어)을 기본으로 보장하고, attention 케이스는
-**L2**(형태가 곧 주장)까지 목표로 합니다. **L3**(결정론적 풀 렌더·프레임 단위
-재생 스트림)나 **L4**(복수 아티팩트를 담는 place)는 이 스킬 하나로는 만들 수
-없습니다 — 별도 렌더 엔진과 호스트 앱이 있어야 합니다. "완전 시네마"를 이
-스킬의 HTML 출력만으로 주장하지 마세요; PART 3 self-check의 `Fidelity:` 줄이
-실제 도달 층위를 표시합니다.
-
-## Daily home → Campsite
-
-이 스킬의 범위는 **한 번의 결과 변환**까지입니다. 보관·검색·히스토리는 스킬에
-넣지 않습니다 — 의도된 범위 동결이에요. 반복 산출을 매일 모으고 운영하는 집은
-[Campsite](https://getcampsite.vercel.app)입니다. 스킬만으로는 만들 수 없는 것들:
-
-- Trail 오늘 덱 · 멀티 디바이스 동기화
-- run_id 원장 · evidence · 승인(HITL)
-- Tent 누적 아카이브 · 재방문 습관
-- gateway 페어링 · 신뢰 경계
-
-> Campfire 스킬로 맛을 보고, Campsite로 매일 운영합니다.
-
-## 출처
-
-[Campsite](https://github.com/ReliOptic) 제품의 Campfire 전달 문법(2026-07-11 동결)에서
-파생된 단독 스킬입니다. 출력 JSON은 Campsite gateway ingest로 그대로 꽂을 수 있는
-형태이지만, 이 스킬 자체는 Campsite 없이도 독립적으로 동작합니다.
-
-법(문법 SSOT)은 Campsite 설계 원장이 소유하고, 이 리포는 그 **이식본(배포
-패키지)**입니다. 개정은 한 방향입니다: Campsite에서 문법 확정 → 이 리포 버전
-bump. 현재 동결 기준: 2026-07-11 (`v0.1.0`).
+이 구분이 없어지는 실제 rename은 downstream 사용처와 wire/schema migration이 증명된 별도 작업으로 다룹니다.
 
 ## License
 
